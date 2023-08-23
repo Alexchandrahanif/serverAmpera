@@ -16,6 +16,12 @@ module.exports = {
         type: DataTypes.UUID,
         defaultValue: Sequelize.literal("uuid_generate_v4()"),
       },
+      customerName: {
+        type: Sequelize.STRING,
+      },
+      tableCode: {
+        type: Sequelize.STRING,
+      },
       catatan: {
         type: Sequelize.STRING,
       },

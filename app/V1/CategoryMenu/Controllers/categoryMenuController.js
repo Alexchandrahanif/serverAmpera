@@ -1,4 +1,4 @@
-const { Customer } = require("../../../../models");
+const { CategoryMenu } = require("../../../../models");
 
 class Controller {
   // GET ALL
