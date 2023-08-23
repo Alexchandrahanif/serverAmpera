@@ -1,4 +1,5 @@
 "use strict";
+const { hashingPassword } = require("../helper/helper");
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Customer extends Model {
@@ -27,5 +28,8 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "Customer",
     }
   );
+  Customer.beforeCreate((data) => {
+    data.pin = hashingPassword(data.pin);
+  });
   return Customer;
 };
