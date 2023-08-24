@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
   Table.init(
     {
       tableCode: DataTypes.STRING,
+      tableNumber: DataTypes.INTEGER,
       totalOrder: DataTypes.INTEGER,
       orderPrice: DataTypes.INTEGER,
       totalDiscount: DataTypes.INTEGER,

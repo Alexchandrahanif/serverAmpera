@@ -22,6 +22,10 @@ module.exports = (sequelize, DataTypes) => {
       Menu.belongsTo(models.CategoryMenu, {
         foreignKey: "CategoryMenuId",
       });
+
+      Menu.belongsTo(models.Company, {
+        foreignKey: "CompanyId",
+      });
     }
   }
   Menu.init(
@@ -32,6 +36,7 @@ module.exports = (sequelize, DataTypes) => {
       stokMenu: DataTypes.INTEGER,
       photoMenu: DataTypes.INTEGER,
       CategoryMenuId: DataTypes.UUID,
+      CompanyId: DataTypes.UUID,
     },
     {
       sequelize,

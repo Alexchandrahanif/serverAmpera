@@ -93,30 +93,6 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       address: DataTypes.STRING,
-      role: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: {
-            msg: "Role Tidak Boleh Kosong",
-          },
-          notNull: {
-            msg: "Role Tidak Boleh Null",
-          },
-        },
-      },
-      pin: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        validate: {
-          notEmpty: {
-            msg: "PIN Tidak Boleh Kosong",
-          },
-          notNull: {
-            msg: "PIN Tidak Boleh Null",
-          },
-        },
-      },
     },
     {
       sequelize,

@@ -21,7 +21,8 @@ module.exports = (sequelize, DataTypes) => {
       email: DataTypes.STRING,
       phoneNumber: DataTypes.STRING,
       address: DataTypes.STRING,
-      pin: DataTypes.STRING,
+      totalTransaction: DataTypes.STRING,
+      lastOrder: DataTypes.DATE,
     },
     {
       sequelize,

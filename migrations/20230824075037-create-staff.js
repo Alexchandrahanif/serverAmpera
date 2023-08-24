@@ -8,7 +8,7 @@ module.exports = {
     queryInterface.sequelize.query(
       'CREATE EXTENSION IF NOT EXISTS "uuid-ossp";'
     );
-    await queryInterface.createTable("Tables", {
+    await queryInterface.createTable("Staffs", {
       id: {
         allowNull: true,
         unique: true,
@@ -16,29 +16,25 @@ module.exports = {
         type: DataTypes.UUID,
         defaultValue: Sequelize.literal("uuid_generate_v4()"),
       },
-      tableCode: {
+      staffName: {
         type: Sequelize.STRING,
       },
-      tableNumber: {
-        type: Sequelize.INTEGER,
-        unique: true,
+      phoneNumber: {
+        type: Sequelize.STRING,
       },
-      totalOrder: {
-        type: Sequelize.INTEGER,
-      },
-      orderPrice: {
+      pin: {
         type: Sequelize.INTEGER,
       },
-      totalDiscount: {
-        type: Sequelize.INTEGER,
+      lastLogin: {
+        type: Sequelize.DATE,
       },
-      totalPrice: {
-        type: Sequelize.INTEGER,
+      lastLogout: {
+        type: Sequelize.DATE,
       },
-      UserId: {
+      CompanyId: {
         type: Sequelize.UUID,
         references: {
-          model: "Users",
+          model: "Companies",
           key: "id",
         },
         onDelete: "cascade",
@@ -55,6 +51,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Tables");
+    await queryInterface.dropTable("Staffs");
   },
 };

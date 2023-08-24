@@ -16,6 +16,14 @@ module.exports = (sequelize, DataTypes) => {
       Company.belongsTo(models.User, {
         foreignKey: "UserId",
       });
+
+      Company.hasMany(models.Menu, {
+        foreignKey: "CompanyId",
+      });
+
+      Company.hasMany(models.Staff, {
+        foreignKey: "CompanyId",
+      });
     }
   }
   Company.init(

@@ -30,8 +30,11 @@ module.exports = {
       address: {
         type: Sequelize.STRING,
       },
-      pin: {
+      totalTransaction: {
         type: Sequelize.INTEGER,
+      },
+      lastOrder: {
+        type: Sequelize.DATE,
       },
       createdAt: {
         allowNull: false,

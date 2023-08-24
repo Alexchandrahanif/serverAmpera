@@ -21,10 +21,37 @@ const handleError = (err, req, res, next) => {
   } else if (err.name === "Mohon Masukkan Email") {
     code = 400;
     message = "Mohon Masukkan Email";
+  } else if (err.name === "Mohon Masukan PIN 4 Digit") {
+    code = 400;
+    message = "Mohon Masukan PIN 4 Digit";
+  } else if (err.name === "Nomor Telepon Sudah Terdaftar") {
+    code = 400;
+    message = "Nomor Telepon Sudah Terdaftar";
   }
 
   // Error Id (400)
-  else if (err.name === "Id User Tidak Ditemukan") {
+  else if (err.name === "Id Category Company Tidak Ditemukan") {
+    code = 400;
+    message = "Id Category Company Tidak Ditemukan";
+  } else if (err.name === "Id Company Tidak Ditemukan") {
+    code = 400;
+    message = "Id Company Tidak Ditemukan";
+  } else if (err.name === "Id Category Menu Tidak Ditemukan") {
+    code = 400;
+    message = "Id Category Menu Tidak Ditemukan";
+  } else if (err.name === "Id Menu Tidak Ditemukan") {
+    code = 400;
+    message = "Id Menu Tidak Ditemukan";
+  } else if (err.name === "Id Customer Tidak Ditemukan") {
+    code = 400;
+    message = "Id Customer Tidak Ditemukan";
+  } else if (err.name === "Id Order Tidak Ditemukan") {
+    code = 400;
+    message = "Id Order Tidak Ditemukan";
+  } else if (err.name === "Id Table Tidak Ditemukan") {
+    code = 400;
+    message = "Id Table Tidak Ditemukan";
+  } else if (err.name === "Id User Tidak Ditemukan") {
     code = 400;
     message = "Id User Tidak Ditemukan";
   }
