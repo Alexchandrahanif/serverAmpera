@@ -34,6 +34,13 @@ module.exports = {
       totalPrice: {
         type: Sequelize.INTEGER,
       },
+      orderStatus: {
+        type: Sequelize.STRING,
+      },
+      paymentStatus: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+      },
       UserId: {
         type: Sequelize.UUID,
         references: {

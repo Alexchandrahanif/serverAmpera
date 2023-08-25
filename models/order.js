@@ -39,6 +39,8 @@ module.exports = (sequelize, DataTypes) => {
       orderPrice: DataTypes.INTEGER,
       totalDiscount: DataTypes.INTEGER,
       totalPrice: DataTypes.INTEGER,
+      orderStatus: DataTypes.STRING,
+      paymentStatus: DataTypes.BOOLEAN,
       UserId: DataTypes.UUID,
       CustomerId: DataTypes.UUID,
       TableId: DataTypes.UUID,
