@@ -19,6 +19,9 @@ class Controller {
   // CREATE
   static async create(req, res, next) {
     try {
+      let data = await Order.findAll();
+      const formatCode = (num, places) => String(num).padStart(places, "0");
+      const tableCode = `SPK${formatCode(data.length + 1, 5)}`;
     } catch (error) {
       next(error);
     }

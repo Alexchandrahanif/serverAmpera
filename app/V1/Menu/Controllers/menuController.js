@@ -86,7 +86,7 @@ class Controller {
         name,
         price,
         description,
-        stokMenu,
+        stokMenu: stokMenu ? stokMenu : 0,
         photoMenu: req.file ? req.file.path : "",
       };
 

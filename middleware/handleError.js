@@ -29,30 +29,30 @@ const handleError = (err, req, res, next) => {
     message = "Nomor Telepon Sudah Terdaftar";
   }
 
-  // Error Id (400)
+  // Error Id (404)
   else if (err.name === "Id Category Company Tidak Ditemukan") {
-    code = 400;
+    code = 404;
     message = "Id Category Company Tidak Ditemukan";
   } else if (err.name === "Id Company Tidak Ditemukan") {
-    code = 400;
+    code = 404;
     message = "Id Company Tidak Ditemukan";
   } else if (err.name === "Id Category Menu Tidak Ditemukan") {
-    code = 400;
+    code = 404;
     message = "Id Category Menu Tidak Ditemukan";
   } else if (err.name === "Id Menu Tidak Ditemukan") {
-    code = 400;
+    code = 404;
     message = "Id Menu Tidak Ditemukan";
   } else if (err.name === "Id Customer Tidak Ditemukan") {
-    code = 400;
+    code = 404;
     message = "Id Customer Tidak Ditemukan";
   } else if (err.name === "Id Order Tidak Ditemukan") {
-    code = 400;
+    code = 404;
     message = "Id Order Tidak Ditemukan";
   } else if (err.name === "Id Table Tidak Ditemukan") {
-    code = 400;
+    code = 404;
     message = "Id Table Tidak Ditemukan";
   } else if (err.name === "Id User Tidak Ditemukan") {
-    code = 400;
+    code = 404;
     message = "Id User Tidak Ditemukan";
   }
 

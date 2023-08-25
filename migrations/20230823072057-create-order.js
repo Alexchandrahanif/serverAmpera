@@ -19,12 +19,6 @@ module.exports = {
       customerName: {
         type: Sequelize.STRING,
       },
-      tableCode: {
-        type: Sequelize.STRING,
-      },
-      catatan: {
-        type: Sequelize.STRING,
-      },
       orderPrice: {
         type: Sequelize.INTEGER,
       },

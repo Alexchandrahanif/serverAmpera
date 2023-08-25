@@ -16,6 +16,15 @@ module.exports = {
         type: DataTypes.UUID,
         defaultValue: Sequelize.literal("uuid_generate_v4()"),
       },
+      total: {
+        type: Sequelize.INTEGER,
+      },
+      discount: {
+        type: Sequelize.INTEGER,
+      },
+      catatan: {
+        type: Sequelize.STRING,
+      },
       MenuId: {
         type: Sequelize.UUID,
         references: {
