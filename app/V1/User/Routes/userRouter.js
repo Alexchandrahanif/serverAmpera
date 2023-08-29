@@ -8,6 +8,7 @@ const file = upload();
 
 userRouter.post("/register", file.single("photoUser"), Controller.registerUser);
 userRouter.post("/login", Controller.loginUser);
+userRouter.post("/username", Controller.scanUsername);
 userRouter.get("/", authentication, Controller.getAllUser);
 userRouter.get("/:id", authentication, Controller.getOneUsers);
 userRouter.patch(

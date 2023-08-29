@@ -21,12 +21,18 @@ const handleError = (err, req, res, next) => {
   } else if (err.name === "Mohon Masukkan Email") {
     code = 400;
     message = "Mohon Masukkan Email";
+  } else if (err.name === "Email/Password Salah") {
+    code = 400;
+    message = "Email/Password Salah";
   } else if (err.name === "Mohon Masukan PIN 4 Digit") {
     code = 400;
     message = "Mohon Masukan PIN 4 Digit";
   } else if (err.name === "Nomor Telepon Sudah Terdaftar") {
     code = 400;
     message = "Nomor Telepon Sudah Terdaftar";
+  } else if (err.name === "Username Sudah Terdaftar") {
+    code = 400;
+    message = "Username Sudah Terdaftar";
   }
 
   // Error Id (404)
@@ -60,6 +66,9 @@ const handleError = (err, req, res, next) => {
   else if (err.name === "Invalid authorization") {
     code = 401;
     message = "Token Tidak Ada Atau Salah";
+  } else if (err.name === "Token Table Tidak Valid") {
+    code = 401;
+    message = "Token Table Tidak Valid";
   } else if (err.name === "JsonWebTokenError") {
     code = 401;
     message = "Token Tidak Sesuai";

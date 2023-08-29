@@ -57,6 +57,7 @@ class Controller {
       next(error);
     }
   }
+
   // GET ONE
   static async getOne(req, res, next) {
     try {

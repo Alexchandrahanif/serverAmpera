@@ -35,6 +35,9 @@ module.exports = {
       totalPrice: {
         type: Sequelize.INTEGER,
       },
+      QRCODE: {
+        type: Sequelize.STRING,
+      },
       paymentStatus: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,

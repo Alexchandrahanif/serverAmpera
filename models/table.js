@@ -27,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
       orderPrice: DataTypes.INTEGER,
       totalDiscount: DataTypes.INTEGER,
       paymentStatus: DataTypes.BOOLEAN,
+      QRCODE: DataTypes.STRING,
       totalPrice: DataTypes.INTEGER,
       UserId: DataTypes.UUID,
     },

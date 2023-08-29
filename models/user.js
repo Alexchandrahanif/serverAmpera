@@ -82,6 +82,9 @@ module.exports = (sequelize, DataTypes) => {
       photoUser: DataTypes.STRING,
       phoneNumber: {
         type: DataTypes.STRING,
+        unique: {
+          msg: "Phone Number Sudah Terdaftar",
+        },
         allowNull: false,
         validate: {
           notEmpty: {
