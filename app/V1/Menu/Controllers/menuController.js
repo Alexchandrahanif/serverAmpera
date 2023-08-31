@@ -52,6 +52,65 @@ class Controller {
     }
   }
 
+  // GET ALL BY COMPANY ID
+  static async getAllByCompanyId(req, res, next) {
+    try {
+      const { CompanyId } = req.params;
+      const { limit, page, search, tanggal } = req.query;
+
+      const data = await Company.findByPk(CompanyId);
+      if (!data) {
+        throw { name: "Id Company Tidak Ditemukan" };
+      }
+
+      let pagination = {
+        where: {
+          CompanyId,
+        },
+        order: [["name", "ASC"]],
+      };
+
+      if (limit) {
+        pagination.limit = limit;
+      }
+
+      if (page && limit) {
+        pagination.offset = (page - 1) * limit;
+      }
+
+      if (search) {
+        pagination.where = {
+          [Op.or]: [{ name: { [Op.iLike]: `%${search}%` } }],
+        };
+      }
+
+      if (tanggal) {
+        const pagi = moment().format(`${tanggal} 00:00`);
+        const masuk = moment().format(`${tanggal} 23:59`);
+        pagination.where = {
+          createdAt: {
+            [Op.between]: [pagi, masuk],
+          },
+        };
+      }
+
+      let dataMenu = await Menu.findAndCountAll(pagination);
+
+      let totalPage = Math.ceil(dataMenu.count / (limit ? limit : 50));
+
+      // SUKSES
+      res.status(200).json({
+        statusCode: 200,
+        message: "Berhasil Mendapatkan Semua Data Menu",
+        data: dataMenu.rows,
+        totaldataMenu: dataMenu.count,
+        totalPage: totalPage,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
   // GET ONE
   static async getOne(req, res, next) {
     try {

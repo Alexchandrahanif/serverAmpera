@@ -33,6 +33,9 @@ const handleError = (err, req, res, next) => {
   } else if (err.name === "Username Sudah Terdaftar") {
     code = 400;
     message = "Username Sudah Terdaftar";
+  } else if (err.name === "Order Tidak Tersedia") {
+    code = 400;
+    message = `Username ${err.customer} Sudah Terdaftar`;
   }
 
   // Error Id (404)
@@ -60,6 +63,9 @@ const handleError = (err, req, res, next) => {
   } else if (err.name === "Id User Tidak Ditemukan") {
     code = 404;
     message = "Id User Tidak Ditemukan";
+  } else if (err.name === "Id Staff Tidak Ditemukan") {
+    code = 404;
+    message = "Id Staff Tidak Ditemukan";
   }
 
   // 401

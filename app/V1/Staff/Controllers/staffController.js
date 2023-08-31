@@ -1,5 +1,5 @@
 const formatPhoneNumber = require("../../../../helper/formatPhoneNumber");
-const { Customer, Company } = require("../../../../models");
+const { Staff, Company } = require("../../../../models");
 
 class Controller {
   // GET ALL
@@ -8,7 +8,7 @@ class Controller {
       const { limit, page, search, tanggal } = req.query;
 
       let pagination = {
-        order: [["customerName", "ASC"]],
+        order: [["staffName", "ASC"]],
       };
 
       if (limit) {
@@ -22,9 +22,9 @@ class Controller {
       if (search) {
         pagination.where = {
           [Op.or]: [
-            { customerName: { [Op.iLike]: `%${search}%` } },
+            { staffName: { [Op.iLike]: `%${search}%` } },
             { phoneNumber: { [Op.iLike]: `%${search}%` } },
-            { email: { [Op.iLike]: `%${search}%` } },
+            { role: { [Op.iLike]: `%${search}%` } },
           ],
         };
       }
@@ -39,16 +39,16 @@ class Controller {
         };
       }
 
-      let dataCustomer = await Customer.findAndCountAll(pagination);
+      let dataStaff = await Staff.findAndCountAll(pagination);
 
-      let totalPage = Math.ceil(dataCustomer.count / (limit ? limit : 50));
+      let totalPage = Math.ceil(dataStaff.count / (limit ? limit : 50));
 
       // SUKSES
       res.status(200).json({
         statusCode: 200,
-        message: "Berhasil Mendapatkan Semua Data Customer",
-        data: dataCustomer.rows,
-        totaldataCustomer: dataCustomer.count,
+        message: "Berhasil Mendapatkan Semua Data Staff",
+        data: dataStaff.rows,
+        totaldataStaff: dataStaff.count,
         totalPage: totalPage,
       });
     } catch (error) {
@@ -60,18 +60,18 @@ class Controller {
   static async getOne(req, res, next) {
     try {
       const { id } = req.params;
-      const data = await Customer.findOne({
+      const data = await Staff.findOne({
         where: {
           id,
         },
       });
       if (!data) {
-        throw { name: "Id Customer Tidak Ditemukan" };
+        throw { name: "Id Staff Tidak Ditemukan" };
       }
 
       res.status(200).json({
         statusCode: 200,
-        message: "Berhasil Menampilkan Data Customer",
+        message: "Berhasil Menampilkan Data Staff",
         data,
       });
     } catch (error) {
@@ -94,7 +94,7 @@ class Controller {
         where: {
           CompanyId,
         },
-        order: [["customerName", "ASC"]],
+        order: [["staffName", "ASC"]],
       };
 
       if (limit) {
@@ -108,9 +108,9 @@ class Controller {
       if (search) {
         pagination.where = {
           [Op.or]: [
-            { customerName: { [Op.iLike]: `%${search}%` } },
+            { staffName: { [Op.iLike]: `%${search}%` } },
             { phoneNumber: { [Op.iLike]: `%${search}%` } },
-            { email: { [Op.iLike]: `%${search}%` } },
+            { pin: { [Op.iLike]: `%${search}%` } },
           ],
         };
       }
@@ -125,16 +125,16 @@ class Controller {
         };
       }
 
-      let dataCustomer = await Customer.findAndCountAll(pagination);
+      let dataStaff = await Staff.findAndCountAll(pagination);
 
-      let totalPage = Math.ceil(dataCustomer.count / (limit ? limit : 50));
+      let totalPage = Math.ceil(dataStaff.count / (limit ? limit : 50));
 
       // SUKSES
       res.status(200).json({
         statusCode: 200,
-        message: "Berhasil Mendapatkan Semua Data Customer",
-        data: dataCustomer.rows,
-        totaldataCustomer: dataCustomer.count,
+        message: "Berhasil Mendapatkan Semua Data Staff",
+        data: dataStaff.rows,
+        totaldataStaff: dataStaff.count,
         totalPage: totalPage,
       });
     } catch (error) {
@@ -145,9 +145,9 @@ class Controller {
   // CREATE
   static async create(req, res, next) {
     try {
-      const { customerName, email, phoneNumber, address } = req.body;
+      const { staffName, pin, role, phoneNumber, CompanyId } = req.body;
 
-      const dataPhoneNumber = await Customer.findOne({
+      const dataPhoneNumber = await Staff.findOne({
         where: {
           phoneNumber: formatPhoneNumber(phoneNumber),
         },
@@ -158,18 +158,25 @@ class Controller {
       }
 
       let body = {
-        customerName,
-        email,
+        staffName,
+        pin,
+        role,
         phoneNumber: formatPhoneNumber(phoneNumber),
-        address,
-        totalTransaction: 0,
       };
 
-      const data = await Customer.create(body);
+      if (CompanyId) {
+        const data = await CompanyId.findByPk(Company);
+        if (!data) {
+          throw { name: "Id Company Tidak Ditemukan" };
+        }
+        body.CompanyId = CompanyId;
+      }
+
+      const data = await Staff.create(body);
 
       res.status(201).json({
         statusCode: 201,
-        message: "Berhasil Membuat Data Customer Baru",
+        message: "Berhasil Membuat Data Staff Baru",
         data,
       });
     } catch (error) {
@@ -181,19 +188,20 @@ class Controller {
   static async update(req, res, next) {
     try {
       const { id } = req.params;
-      const { customerName, email, phoneNumber, address } = req.body;
+      const { staffName, role, phoneNumber, CompanyId } = req.body;
 
-      const data = await Customer.findOne({
+      const data = await Staff.findOne({
         where: {
           id,
         },
       });
+
       if (!data) {
-        throw { name: "Id Customer Tidak Ditemukan" };
+        throw { name: "Id Staff Tidak Ditemukan" };
       }
 
       if (formatPhoneNumber(phoneNumber) != data.phoneNumber) {
-        const data = await Customer.findOne({
+        const data = await Staff.findOne({
           where: {
             phoneNumber: formatPhoneNumber(phoneNumber),
           },
@@ -202,14 +210,22 @@ class Controller {
           throw { name: "Nomor Telepon Sudah Terdaftar" };
         }
       }
+
       let body = {
-        customerName,
-        email,
+        staffName,
+        role,
         phoneNumber: formatPhoneNumber(phoneNumber),
-        address,
       };
 
-      await Customer.update(body, {
+      if (CompanyId) {
+        const data = await CompanyId.findByPk(Company);
+        if (!data) {
+          throw { name: "Id Company Tidak Ditemukan" };
+        }
+        body.CompanyId = CompanyId;
+      }
+
+      const data = await Staff.update(body, {
         where: {
           id,
         },
@@ -217,7 +233,7 @@ class Controller {
 
       res.status(200).json({
         statusCode: 200,
-        message: "Berhasil Memperbaharui Data Customer",
+        message: "Berhasil Memperbaharui Data Staff",
       });
     } catch (error) {
       next(error);
@@ -228,16 +244,16 @@ class Controller {
   static async delete(req, res, next) {
     try {
       const { id } = req.params;
-      const data = await Customer.findOne({
+      const data = await Staff.findOne({
         where: {
           id,
         },
       });
       if (!data) {
-        throw { name: "Id Customer Tidak Ditemukan" };
+        throw { name: "Id Staff Tidak Ditemukan" };
       }
 
-      await Customer.destroy({
+      await Staff.destroy({
         where: {
           id,
         },
@@ -245,7 +261,7 @@ class Controller {
 
       res.status(200).json({
         statusCode: 200,
-        message: "Berhasil Menghapus Data Customer",
+        message: "Berhasil Menghapus Data Staff",
       });
     } catch (error) {
       next(error);

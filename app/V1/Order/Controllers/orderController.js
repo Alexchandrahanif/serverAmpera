@@ -58,6 +58,31 @@ class Controller {
     }
   }
 
+  // GET ALL ORDER BY CUSTOMER NAME
+  static async getAllByCustomerName(req, res, next) {
+    try {
+      const { customerName } = req.params;
+
+      const data = await Order.findOne({
+        where: {
+          customerName: customerName.toLoweCase(),
+        },
+      });
+
+      if (!data) {
+        throw {
+          name: "Order Tidak Tersedia",
+          customer: customerName.toLoweCase(),
+        };
+      }
+      res.status(200).json({
+        message: "Berhasil Menampilkan Data ",
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
   // GET ONE
   static async getOne(req, res, next) {
     try {
@@ -96,7 +121,7 @@ class Controller {
       // ];
 
       let body = {
-        customerName,
+        customerName: customerName.toLoweCase(),
         orderStatus: "BELUM_DIPROSES",
         paymentStatus: false,
         UserId: req.user.id,

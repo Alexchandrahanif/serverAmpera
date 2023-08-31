@@ -7,19 +7,24 @@ const menuRouter = require("express").Router();
 const file = upload();
 
 menuRouter.get("/", authentication, Controller.getAll);
-menuRouter.get("/", authentication, Controller.getOne);
 menuRouter.get(
+  "/Company/:CompanyId",
+  authentication,
+  Controller.getAllByCompanyId
+);
+menuRouter.get("/:id", authentication, Controller.getOne);
+menuRouter.post(
   "/",
   authentication,
   file.single("photoMenu"),
   Controller.create
 );
-menuRouter.get(
-  "/",
+menuRouter.patch(
+  "/:id",
   authentication,
   file.single("photoMenu"),
   Controller.update
 );
-menuRouter.get("/", authentication, Controller.delete);
+menuRouter.delete("/:id", authentication, Controller.delete);
 
 module.exports = menuRouter;
