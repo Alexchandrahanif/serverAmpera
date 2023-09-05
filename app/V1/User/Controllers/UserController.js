@@ -95,8 +95,8 @@ class Controller {
       const authorization = createAccessToken(payload);
 
       // SUCCESS
-      res.status(201).json({
-        statusCode: 201,
+      res.status(200).json({
+        statusCode: 200,
         message: "Selamat, berhasil login",
         authorization: authorization,
         name: dataUser.displayName,

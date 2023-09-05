@@ -104,7 +104,6 @@ module.exports = (sequelize, DataTypes) => {
   );
   User.beforeCreate((data) => {
     data.password = hashingPassword(data.password);
-    data.pin = hashingPassword(data.pin);
   });
   return User;
 };
