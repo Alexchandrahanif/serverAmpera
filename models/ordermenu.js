@@ -20,7 +20,6 @@ module.exports = (sequelize, DataTypes) => {
   OrderMenu.init(
     {
       total: DataTypes.INTEGER,
-      discount: DataTypes.INTEGER,
       catatan: DataTypes.STRING,
       MenuId: DataTypes.UUID,
       OrderId: DataTypes.UUID,

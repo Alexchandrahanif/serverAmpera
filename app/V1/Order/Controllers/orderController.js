@@ -109,7 +109,7 @@ class Controller {
   // CREATE
   static async create(req, res, next) {
     try {
-      const { customerName, CustomerId, TableId, MenuId } = req.body;
+      const { customerName, TableId, MenuId } = req.body;
 
       // let MenuId = [
       //   {
@@ -129,7 +129,6 @@ class Controller {
 
       if (MenuId) {
         let orderPrice = 0;
-        let totalDiscount = 0;
         MenuId.forEach(async (el) => {
           const data = await Menu.findOne({
             where: {
@@ -137,12 +136,10 @@ class Controller {
             },
           });
           orderPrice += data.price * el.total;
-          totalDiscount += el.discount * el.total;
         });
 
         body.orderPrice = orderPrice;
-        body.totalDiscount = totalDiscount;
-        body.totalPrice = orderPrice - totalDiscount;
+        body.totalPrice = orderPrice;
       }
 
       if (TableId) {
@@ -155,19 +152,6 @@ class Controller {
           throw { name: "Id Table Tidak Ditemukan" };
         } else {
           body.TableId = TableId;
-        }
-      }
-
-      if (CustomerId) {
-        const data = await Customer.findOne({
-          where: {
-            id: CustomerId,
-          },
-        });
-        if (!data) {
-          throw { name: "Id Table Tidak Ditemukan" };
-        } else {
-          body.CustomerId = CustomerId;
         }
       }
 

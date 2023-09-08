@@ -36,7 +36,6 @@ module.exports = (sequelize, DataTypes) => {
       stokMenu: DataTypes.INTEGER,
       photoMenu: DataTypes.INTEGER,
       CategoryMenuId: DataTypes.UUID,
-      CompanyId: DataTypes.UUID,
     },
     {
       sequelize,

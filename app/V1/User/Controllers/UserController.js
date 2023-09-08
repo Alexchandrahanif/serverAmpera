@@ -4,14 +4,23 @@ const {
   createAccessToken,
 } = require("../../../../helper/helper");
 const remove = require("../../../../helper/remove");
-const { User } = require("../../../../models");
+const { User, Company } = require("../../../../models");
 
 class Controller {
   // REGISTER USER
   static async registerUser(req, res, next) {
     try {
-      const { displayName, username, email, password, phoneNumber, address } =
-        req.body;
+      console.log(req.body, req.file);
+
+      const {
+        displayName,
+        username,
+        email,
+        password,
+        phoneNumber,
+        address,
+        companyName,
+      } = req.body;
 
       const body = {
         displayName,
@@ -21,6 +30,7 @@ class Controller {
         phoneNumber: formatPhoneNumber(phoneNumber),
         address,
         photoUser: req.file ? req.file.path : "",
+        companyName,
       };
 
       const dataUser = await User.create(body);
@@ -99,7 +109,7 @@ class Controller {
         statusCode: 200,
         message: "Selamat, berhasil login",
         authorization: authorization,
-        name: dataUser.displayName,
+        displayName: dataUser.displayName,
         email: dataUser.email,
         photoUser: dataUser.photoUser ? dataUser.photoUser : "",
       });
@@ -194,8 +204,15 @@ class Controller {
   static async updateUser(req, res, next) {
     try {
       const { id } = req.params;
-      const { displayName, username, email, password, phoneNumber, address } =
-        req.body;
+      const {
+        displayName,
+        username,
+        email,
+        password,
+        phoneNumber,
+        address,
+        companyName,
+      } = req.body;
 
       const dataUser = await User.findOne({
         where: {
@@ -214,6 +231,7 @@ class Controller {
         password,
         phoneNumber: formatPhoneNumber(phoneNumber),
         address,
+        companyName,
       };
 
       if (req.file) {

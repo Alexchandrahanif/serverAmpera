@@ -138,8 +138,7 @@ class Controller {
   // CREATE
   static async create(req, res, next) {
     try {
-      const { name, price, description, stokMenu, CompanyId, CategoryMenuId } =
-        req.body;
+      const { name, price, description, stokMenu, CategoryMenuId } = req.body;
 
       let body = {
         name,
@@ -148,18 +147,6 @@ class Controller {
         stokMenu: stokMenu ? stokMenu : 0,
         photoMenu: req.file ? req.file.path : "",
       };
-
-      if (CompanyId) {
-        const data = await Company.findOne({
-          where: {
-            id: CompanyId,
-          },
-        });
-        if (!data) {
-          throw { name: "Id Company Tidak Ditemukan" };
-        }
-        body.CompanyId = CompanyId;
-      }
 
       if (CategoryMenuId) {
         const data = await CategoryMenu.findOne({
@@ -189,8 +176,7 @@ class Controller {
   static async update(req, res, next) {
     try {
       const { id } = req.params;
-      const { name, price, description, stokMenu, CompanyId, CategoryMenuId } =
-        req.body;
+      const { name, price, description, stokMenu, CategoryMenuId } = req.body;
 
       const data = await Menu.findOne({
         where: {
@@ -212,18 +198,6 @@ class Controller {
       if (req.file) {
         remove(data.photoMenu);
         body.photoMenu = req.file ? req.file.path : "";
-      }
-
-      if (CompanyId) {
-        const data = await Company.findOne({
-          where: {
-            id: CompanyId,
-          },
-        });
-        if (!data) {
-          throw { name: "Id Company Tidak Ditemukan" };
-        }
-        body.CompanyId = CompanyId;
       }
 
       if (CategoryMenuId) {

@@ -19,9 +19,6 @@ module.exports = {
       total: {
         type: Sequelize.INTEGER,
       },
-      discount: {
-        type: Sequelize.INTEGER,
-      },
       catatan: {
         type: Sequelize.STRING,
       },

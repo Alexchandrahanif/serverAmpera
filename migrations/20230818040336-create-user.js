@@ -42,6 +42,9 @@ module.exports = {
       address: {
         type: Sequelize.STRING,
       },
+      companyName: {
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

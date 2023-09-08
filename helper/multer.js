@@ -9,10 +9,6 @@ const upload = () => {
       if (file.fieldname === "photoUser") {
         cb(null, `./upload/photoUser/`);
       }
-
-      if (file.fieldname === "companyLogo") {
-        cb(null, `./upload/companyLogo/`);
-      }
     },
     filename: function (req, file, cb) {
       const tanggal = new Date().getTime().toString();

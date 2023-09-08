@@ -40,15 +40,6 @@ module.exports = {
         onDelete: "cascade",
         onUpdate: "cascade",
       },
-      CompanyId: {
-        type: Sequelize.UUID,
-        references: {
-          model: "Companies",
-          key: "id",
-        },
-        onDelete: "cascade",
-        onUpdate: "cascade",
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

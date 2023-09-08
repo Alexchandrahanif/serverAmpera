@@ -19,10 +19,10 @@ module.exports = {
       customerName: {
         type: Sequelize.STRING,
       },
-      orderPrice: {
-        type: Sequelize.INTEGER,
+      orderCode: {
+        type: Sequelize.STRING,
       },
-      totalDiscount: {
+      orderPrice: {
         type: Sequelize.INTEGER,
       },
       totalPrice: {
@@ -39,15 +39,6 @@ module.exports = {
         type: Sequelize.UUID,
         references: {
           model: "Users",
-          key: "id",
-        },
-        onDelete: "cascade",
-        onUpdate: "cascade",
-      },
-      CustomerId: {
-        type: Sequelize.UUID,
-        references: {
-          model: "Customers",
           key: "id",
         },
         onDelete: "cascade",

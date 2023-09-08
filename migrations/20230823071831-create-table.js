@@ -29,9 +29,6 @@ module.exports = {
       orderPrice: {
         type: Sequelize.INTEGER,
       },
-      totalDiscount: {
-        type: Sequelize.INTEGER,
-      },
       totalPrice: {
         type: Sequelize.INTEGER,
       },
