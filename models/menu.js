@@ -22,10 +22,6 @@ module.exports = (sequelize, DataTypes) => {
       Menu.belongsTo(models.CategoryMenu, {
         foreignKey: "CategoryMenuId",
       });
-
-      Menu.belongsTo(models.Company, {
-        foreignKey: "CompanyId",
-      });
     }
   }
   Menu.init(

@@ -1,5 +1,4 @@
 const CategoryMenuRouter = require("../app/V1/CategoryMenu/Routes/categoryMenuRouter");
-const companyRouter = require("../app/V1/Company/Routes/companyRouter");
 const menuRouter = require("../app/V1/Menu/Routes/menuRouter");
 const orderRouter = require("../app/V1/Order/Routes/orderRouter");
 const tableRouter = require("../app/V1/Table/Routes/tableRouter");

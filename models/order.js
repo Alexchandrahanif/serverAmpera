@@ -13,10 +13,6 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "UserId",
       });
 
-      Order.belongsTo(models.Customer, {
-        foreignKey: "CustomerId",
-      });
-
       Order.belongsTo(models.Table, {
         foreignKey: "TableId",
       });
