@@ -31,21 +31,6 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
-      username: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: {
-          msg: "Username Sudah Terdaftar",
-        },
-        validate: {
-          notEmpty: {
-            msg: "Username Tidak Boleh Kosong",
-          },
-          notNull: {
-            msg: "Username Tidak Boleh Null",
-          },
-        },
-      },
       email: {
         type: DataTypes.STRING,
         allowNull: false,
